@@ -1,0 +1,378 @@
+{
+  "data_overview": {
+    "order_records": 206923,
+    "date_range": "2025-09-01 00:00:00 ~ 2025-11-30 00:00:00",
+    "unique_users": 13201,
+    "unique_skus": 4619,
+    "unique_categories": 366,
+    "total_gmv": 3477676.215,
+    "total_discount": 670278.4049999999
+  },
+  "event_summary": [
+    {
+      "activity_name": "10月活动",
+      "实际GMV": 486921.62,
+      "基线GMV": 398014.61,
+      "增量GMV": 88907.0,
+      "总折扣": 103775.3,
+      "支付UV": 6783,
+      "订单数": 7020,
+      "活动天数": 11,
+      "增量率": 22.34,
+      "iROI": 0.857,
+      "日均GMV": 44265.6,
+      "日均增量": 8082.45
+    },
+    {
+      "activity_name": "11月活动",
+      "实际GMV": 343947.03,
+      "基线GMV": 281924.89,
+      "增量GMV": 62022.14,
+      "总折扣": 86163.28,
+      "支付UV": 4783,
+      "订单数": 4979,
+      "活动天数": 8,
+      "增量率": 22.0,
+      "iROI": 0.72,
+      "日均GMV": 42993.38,
+      "日均增量": 7752.77
+    },
+    {
+      "activity_name": "8月活动",
+      "实际GMV": 99255.21,
+      "基线GMV": 99940.52,
+      "增量GMV": -685.31,
+      "总折扣": 20130.21,
+      "支付UV": 1522,
+      "订单数": 1565,
+      "活动天数": 3,
+      "增量率": -0.69,
+      "iROI": -0.034,
+      "日均GMV": 33085.07,
+      "日均增量": -228.44
+    },
+    {
+      "activity_name": "9月活动",
+      "实际GMV": 423500.78,
+      "基线GMV": 398149.82,
+      "增量GMV": 25350.95,
+      "总折扣": 79822.16,
+      "支付UV": 6315,
+      "订单数": 6517,
+      "活动天数": 11,
+      "增量率": 6.37,
+      "iROI": 0.318,
+      "日均GMV": 38500.07,
+      "日均增量": 2304.63
+    }
+  ],
+  "category_sensitivity": [
+    {
+      "category_name": "拖把",
+      "gmv_non": 23.18,
+      "gmv_act": 431.85,
+      "uv_non": 1.0,
+      "uv_act": 1.0,
+      "disc_non": 11.25,
+      "disc_act": 0.0,
+      "gmv_lift": 1763.03,
+      "uv_lift": 0.0,
+      "roi": NaN
+    },
+    {
+      "category_name": "冷冻即食面/饭",
+      "gmv_non": 32.02,
+      "gmv_act": 122.06,
+      "uv_non": 1.0,
+      "uv_act": 1.0,
+      "disc_non": 12.3,
+      "disc_act": 35.18,
+      "gmv_lift": 281.2,
+      "uv_lift": 0.0,
+      "roi": 2.559
+    },
+    {
+      "category_name": "驱蚊器",
+      "gmv_non": 29.25,
+      "gmv_act": 63.51,
+      "uv_non": 1.0,
+      "uv_act": 1.0,
+      "disc_non": 7.35,
+      "disc_act": 14.18,
+      "gmv_lift": 117.13,
+      "uv_lift": 0.0,
+      "roi": 2.416
+    },
+    {
+      "category_name": "其他冷冻甜点",
+      "gmv_non": 48.4,
+      "gmv_act": 98.32,
+      "uv_non": 1.0,
+      "uv_act": 2.0,
+      "disc_non": 52.5,
+      "disc_act": 41.25,
+      "gmv_lift": 103.14,
+      "uv_lift": 100.0,
+      "roi": 1.21
+    },
+    {
+      "category_name": "面膜",
+      "gmv_non": 8.93,
+      "gmv_act": 15.59,
+      "uv_non": 1.0,
+      "uv_act": 1.2,
+      "disc_non": 2.25,
+      "disc_act": 4.32,
+      "gmv_lift": 74.58,
+      "uv_lift": 20.0,
+      "roi": 1.542
+    },
+    {
+      "category_name": "纸类",
+      "gmv_non": 47.48,
+      "gmv_act": 80.76,
+      "uv_non": 1.0,
+      "uv_act": 1.33,
+      "disc_non": 0.0,
+      "disc_act": 0.0,
+      "gmv_lift": 70.09,
+      "uv_lift": 33.0,
+      "roi": NaN
+    },
+    {
+      "category_name": "乳液/面霜",
+      "gmv_non": 45.33,
+      "gmv_act": 76.9,
+      "uv_non": 1.54,
+      "uv_act": 2.3,
+      "disc_non": 16.32,
+      "disc_act": 40.25,
+      "gmv_lift": 69.64,
+      "uv_lift": 49.35,
+      "roi": 0.784
+    },
+    {
+      "category_name": "衣物柔顺剂",
+      "gmv_non": 148.72,
+      "gmv_act": 248.68,
+      "uv_non": 4.59,
+      "uv_act": 7.91,
+      "disc_non": 38.26,
+      "disc_act": 110.92,
+      "gmv_lift": 67.21,
+      "uv_lift": 72.33,
+      "roi": 0.901
+    },
+    {
+      "category_name": "洗衣液",
+      "gmv_non": 300.86,
+      "gmv_act": 490.46,
+      "uv_non": 6.34,
+      "uv_act": 11.48,
+      "disc_non": 90.38,
+      "disc_act": 268.03,
+      "gmv_lift": 63.02,
+      "uv_lift": 81.07,
+      "roi": 0.707
+    },
+    {
+      "category_name": "其它厨房用具",
+      "gmv_non": 15.05,
+      "gmv_act": 24.0,
+      "uv_non": 1.25,
+      "uv_act": 1.0,
+      "disc_non": 0.0,
+      "disc_act": 5.5,
+      "gmv_lift": 59.47,
+      "uv_lift": -20.0,
+      "roi": 1.627
+    },
+    {
+      "category_name": "石榴汁",
+      "gmv_non": 25.48,
+      "gmv_act": 40.05,
+      "uv_non": 1.86,
+      "uv_act": 1.89,
+      "disc_non": 3.19,
+      "disc_act": 6.95,
+      "gmv_lift": 57.18,
+      "uv_lift": 1.61,
+      "roi": 2.096
+    },
+    {
+      "category_name": "画具画材",
+      "gmv_non": 9.88,
+      "gmv_act": 14.96,
+      "uv_non": 1.0,
+      "uv_act": 1.0,
+      "disc_non": 0.0,
+      "disc_act": 0.0,
+      "gmv_lift": 51.42,
+      "uv_lift": 0.0,
+      "roi": NaN
+    },
+    {
+      "category_name": "烘焙辅料",
+      "gmv_non": 31.02,
+      "gmv_act": 46.78,
+      "uv_non": 1.43,
+      "uv_act": 1.9,
+      "disc_non": 5.21,
+      "disc_act": 8.21,
+      "gmv_lift": 50.81,
+      "uv_lift": 32.87,
+      "roi": 1.92
+    },
+    {
+      "category_name": "其他运动功能饮料",
+      "gmv_non": 17.75,
+      "gmv_act": 26.76,
+      "uv_non": 1.0,
+      "uv_act": 1.38,
+      "disc_non": 7.96,
+      "disc_act": 8.79,
+      "gmv_lift": 50.76,
+      "uv_lift": 38.0,
+      "roi": 1.025
+    },
+    {
+      "category_name": "刮毛刀/剃毛刀",
+      "gmv_non": 26.05,
+      "gmv_act": 39.17,
+      "uv_non": 1.19,
+      "uv_act": 1.18,
+      "disc_non": 4.5,
+      "disc_act": 5.32,
+      "gmv_lift": 50.36,
+      "uv_lift": -0.84,
+      "roi": 2.466
+    },
+    {
+      "category_name": "葵花籽油",
+      "gmv_non": 174.47,
+      "gmv_act": 260.55,
+      "uv_non": 4.86,
+      "uv_act": 6.73,
+      "disc_non": 18.21,
+      "disc_act": 58.2,
+      "gmv_lift": 49.34,
+      "uv_lift": 38.48,
+      "roi": 1.479
+    },
+    {
+      "category_name": "钢丝球/清洁海绵",
+      "gmv_non": 25.73,
+      "gmv_act": 38.34,
+      "uv_non": 1.96,
+      "uv_act": 2.96,
+      "disc_non": 0.54,
+      "disc_act": 2.94,
+      "gmv_lift": 49.01,
+      "uv_lift": 51.02,
+      "roi": 4.289
+    },
+    {
+      "category_name": "清洁洗发水",
+      "gmv_non": 39.53,
+      "gmv_act": 58.21,
+      "uv_non": 1.72,
+      "uv_act": 2.19,
+      "disc_non": 4.42,
+      "disc_act": 9.65,
+      "gmv_lift": 47.26,
+      "uv_lift": 27.33,
+      "roi": 1.936
+    },
+    {
+      "category_name": "调和油",
+      "gmv_non": 63.15,
+      "gmv_act": 92.12,
+      "uv_non": 2.55,
+      "uv_act": 4.16,
+      "disc_non": 4.01,
+      "disc_act": 8.31,
+      "gmv_lift": 45.87,
+      "uv_lift": 63.14,
+      "roi": 3.486
+    },
+    {
+      "category_name": "谷物棒",
+      "gmv_non": 123.08,
+      "gmv_act": 178.72,
+      "uv_non": 4.79,
+      "uv_act": 6.3,
+      "disc_non": 12.23,
+      "disc_act": 22.42,
+      "gmv_lift": 45.21,
+      "uv_lift": 31.52,
+      "roi": 2.482
+    }
+  ],
+  "budget_scenarios": {
+    "current": {
+      "discount": 289890.95,
+      "incremental": 175594.78000000003,
+      "iroi": 0.6057270156243236
+    },
+    "top50": {
+      "discount": 269760.74,
+      "incremental": 176280.09000000003,
+      "iroi": 0.6534682919389976
+    }
+  },
+  "cycle_analysis": {
+    "dow_stats": [
+      {
+        "dow": 0,
+        "gmv_mean": 34996.93,
+        "gmv_std": 3891.86,
+        "count": 13,
+        "dow_name": "周一"
+      },
+      {
+        "dow": 1,
+        "gmv_mean": 36087.07,
+        "gmv_std": 3588.14,
+        "count": 13,
+        "dow_name": "周二"
+      },
+      {
+        "dow": 2,
+        "gmv_mean": 34607.34,
+        "gmv_std": 3802.63,
+        "count": 13,
+        "dow_name": "周三"
+      },
+      {
+        "dow": 3,
+        "gmv_mean": 33636.02,
+        "gmv_std": 4223.18,
+        "count": 13,
+        "dow_name": "周四"
+      },
+      {
+        "dow": 4,
+        "gmv_mean": 41316.39,
+        "gmv_std": 3647.88,
+        "count": 13,
+        "dow_name": "周五"
+      },
+      {
+        "dow": 5,
+        "gmv_mean": 48865.54,
+        "gmv_std": 7992.11,
+        "count": 13,
+        "dow_name": "周六"
+      },
+      {
+        "dow": 6,
+        "gmv_mean": 38004.26,
+        "gmv_std": 4388.92,
+        "count": 13,
+        "dow_name": "周日"
+      }
+    ],
+    "dom_early_avg": 37082.35100000001,
+    "dom_late_avg": 39578.916000000005
+  }
+}

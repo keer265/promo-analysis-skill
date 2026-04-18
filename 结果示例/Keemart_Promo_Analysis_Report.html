@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keemart促销活动效果评估与优化分析报告</title>
+  <style>
+    @page {
+      size: 210mm 297mm;
+      margin: 14mm 14mm 16mm 14mm;
+    }
+    * { box-sizing: border-box; }
+    * { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+    body { margin: 0; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; background: #f3f5f8; color: #1f2937; }
+    .toolbar { position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 18px; background: rgba(22, 58, 107, 0.96); color: #fff; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+    .toolbar-left, .toolbar-right { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .toolbar-title { font-size: 13px; font-weight: 700; margin-right: 8px; }
+    .toolbar button { appearance: none; border: 1px solid rgba(255,255,255,0.24); background: #fff; color: #163a6b; border-radius: 999px; padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .toolbar button.secondary { background: transparent; color: #fff; }
+    .toolbar .hint { font-size: 12px; color: rgba(255,255,255,0.82); }
+    .workspace { padding: 12px 0 30px; }
+    .page { width: 210mm; min-height: 297mm; margin: 10px auto; background: #ffffff; padding: 12mm 12mm 14mm 12mm; box-sizing: border-box; page-break-after: always; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); position: relative; }
+    .cover { display: flex; flex-direction: column; justify-content: space-between; }
+    .eyebrow { font-size: 10pt; color: #4b5563; letter-spacing: 0.5px; text-transform: uppercase; }
+    .title { font-size: 24pt; line-height: 1.25; font-weight: 700; color: #163a6b; margin: 10mm 0 4mm 0; }
+    .subtitle { font-size: 11pt; color: #475569; margin-bottom: 8mm; }
+    .meta, .summary-grid, .kpi-grid, .two-columns, .three-columns { display: grid; gap: 10pt; }
+    .meta { grid-template-columns: repeat(3, 1fr); margin-top: 10mm; }
+    .summary-grid, .two-columns { grid-template-columns: 1fr 1fr; }
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    .three-columns { grid-template-columns: repeat(3, 1fr); }
+    .meta-card, .kpi-card, .finding, .recommendation, .box, .table-wrap, .figure-card { border: 1px solid #d8dee9; border-radius: 10px; padding: 10pt 12pt; box-sizing: border-box; background: #fff; }
+    .meta-card h4, .kpi-card h4, .finding h4, .recommendation h4, .figure-card h4 { margin: 0 0 4pt 0; font-size: 9pt; color: #64748b; font-weight: 600; }
+    .meta-card p, .kpi-card p, .finding p, .recommendation p { margin: 0; font-size: 10pt; line-height: 1.55; }
+    h1, h2, h3 { margin: 0 0 8pt 0; color: #163a6b; }
+    h1 { font-size: 18pt; }
+    h2 { font-size: 14pt; border-bottom: 2px solid #dbe4f0; padding-bottom: 4pt; margin-top: 6pt; }
+    h3 { font-size: 11pt; margin-top: 10pt; }
+    p, li { font-size: 10pt; line-height: 1.6; }
+    .section-lead { font-size: 10pt; color: #334155; margin: 6pt 0 10pt 0; }
+    .highlight { background: #163a6b; color: white; padding: 10pt 12pt; border-radius: 10px; margin: 10pt 0; }
+    .highlight strong { display: block; margin-bottom: 4pt; font-size: 10pt; }
+    .figure-card { margin: 10pt 0 14pt 0; padding: 0; overflow: hidden; }
+    .figure-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 10pt 12pt 8pt 12pt; border-bottom: 1px solid #e5ebf3; background: #f8fbff; }
+    .figure-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .figure-actions button { appearance: none; border: 1px solid #cbd5e1; background: #fff; color: #163a6b; border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .figure-media { min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 10pt 12pt; background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%); border-bottom: 1px solid #edf2f7; }
+    .figure-media img, .figure-media svg { width: 100%; max-height: 310px; object-fit: contain; display: block; }
+    .figure-caption { padding: 10pt 12pt 4pt 12pt; font-size: 9.5pt; color: #334155; border-bottom: 1px solid #edf2f7; }
+    .chart-guide { background: #ebf4ff; border-left: 4px solid #3b82f6; padding: 8pt 10pt; border-radius: 6px; margin: 10pt 12pt 6pt 12pt; font-size: 9pt; line-height: 1.5; }
+    .key-insights { background: #f8fafc; border-left: 4px solid #163a6b; padding: 8pt 10pt; border-radius: 6px; margin: 6pt 12pt 12pt 12pt; font-size: 9pt; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+    th, td { border-bottom: 1px solid #e2e8f0; padding: 6pt 5pt; text-align: left; vertical-align: top; }
+    th { background: #eff5fb; color: #163a6b; font-weight: 700; }
+    .footer-note { margin-top: 8pt; font-size: 8.5pt; color: #64748b; }
+    [data-editable="true"] { transition: outline-color 0.15s ease, background-color 0.15s ease; border-radius: 4px; }
+    .editing [data-editable="true"]:hover { outline: 1px dashed rgba(37, 99, 235, 0.4); background: rgba(37, 99, 235, 0.03); }
+    [contenteditable="true"]:focus { outline: 2px solid #2563eb; background: #fff; }
+    .editor-help { margin: 8px auto 0; width: 210mm; color: #334155; font-size: 12px; line-height: 1.55; padding: 0 4px; }
+    .editor-help .box { background: #fff; border: 1px solid #d8dee9; border-radius: 12px; padding: 10px 12px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+    .hidden-input { display: none; }
+    .highlight-number { font-size: 18pt; font-weight: 700; color: #163a6b; }
+    .positive { color: #059669; }
+    .negative { color: #dc2626; }
+    @media print { body { background: white; } .toolbar, .editor-help, .figure-actions { display: none !important; } .workspace { padding: 0; } .page { margin: 0; box-shadow: none; } }
+  </style>
+</head>
+<body class="editing">
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="toolbar-title">Keemart促销分析报告</span>
+      <span class="hint">可直接改字、替换图像；改完可打印/保存 PDF，也可导出当前 HTML。</span>
+    </div>
+    <div class="toolbar-right">
+      <button type="button" class="secondary" id="toggleEditBtn">编辑模式：开启</button>
+      <button type="button" id="printBtn">打印 / 保存 PDF</button>
+      <button type="button" id="exportBtn">导出当前 HTML</button>
+    </div>
+  </div>
+
+  <div class="editor-help">
+    <div class="box">
+      使用说明：点击页面中的标题、文字卡片、表格单元格或说明框即可直接修改。每张图右上角可点击"替换图片"，把本地 PNG/JPG/SVG 替换进当前图位；导出 HTML 后，替换后的图片会一起保留。
+    </div>
+  </div>
+
+  <div class="workspace">
+    <section class="page cover">
+      <div>
+        <div class="eyebrow" data-editable="true" contenteditable="true">Keemart Platform - Promotion Effectiveness Review</div>
+        <div class="title" data-editable="true" contenteditable="true">Keemart 促销活动效果评估与优化分析报告</div>
+        <div class="subtitle" data-editable="true" contenteditable="true">数据范围：2025年9月-11月 | 美团商分大赛数据</div>
+
+        <div class="meta">
+          <div class="meta-card">
+            <h4 data-editable="true" contenteditable="true">背景信息</h4>
+            <p data-editable="true" contenteditable="true">Keemart电商平台，涵盖366个品类、4619个SKU、13,201名用户，覆盖8月-11月四场促销活动</p>
+          </div>
+          <div class="meta-card">
+            <h4 data-editable="true" contenteditable="true">数据时间范围</h4>
+            <p data-editable="true" contenteditable="true">2025年9月1日 - 2025年11月30日（91天）</p>
+          </div>
+          <div class="meta-card">
+            <h4 data-editable="true" contenteditable="true">输出定位</h4>
+            <p data-editable="true" contenteditable="true">精简版 HTML 汇报材料 - Executive Blue 风格</p>
+          </div>
+        </div>
+
+        <div class="highlight" data-editable="true" contenteditable="true">
+          <strong>封面摘要</strong>
+          整体来看，10月活动和11月活动带来了显著正向增量（iROI分别达0.857和0.720），但9月活动效果一般（iROI仅0.318），8月活动甚至出现负增量。GMV提升主要来自曝光量增长（+23.8%），转化率反而下降（-10.1%）。约25.4%的SKU存在蚕食效应。建议优先投放高iROI活动，并关注转化率优化而非单纯加码折扣。
+        </div>
+      </div>
+      <div class="footer-note" data-editable="true" contenteditable="true">说明：该 HTML 文件可直接修改；图像可替换；修改后可点击顶部按钮打印或保存为 PDF。</div>
+    </section>
+
+    <section class="page">
+      <h1>执行摘要</h1>
+      <p class="section-lead">本页展示最关键的业务结论，供管理层快速浏览。</p>
+
+      <div class="kpi-grid">
+        <div class="kpi-card"><h4>总活动增量 GMV</h4><p class="highlight-number positive">+175,595</p><p>活动期累计增量</p></div>
+        <div class="kpi-card"><h4>整体 iROI</h4><p class="highlight-number">0.606</p><p>增量GMV/折扣金额</p></div>
+        <div class="kpi-card"><h4>最佳活动窗口</h4><p class="highlight-number positive">10月活动</p><p>iROI=0.857, 日均增量+8,082</p></div>
+        <div class="kpi-card"><h4>主要风险</h4><p class="highlight-number negative">25.4%</p><p>SKU存在蚕食效应</p></div>
+      </div>
+
+      <div class="highlight">
+        <strong>核心判断</strong>
+        10月和11月活动整体带来了正向增量，但增量主要来自曝光提升而非转化优化。部分活动（尤其是8月）存在明显回吐。更适合做定向重投（聚焦高iROI窗口和高敏感品类）而不是全量加深折扣。
+      </div>
+
+      <div class="summary-grid">
+        <div class="finding"><h4>发现1: 周末效应显著</h4><p>周六GMV均值48,866，比周一(34,997)高出39.6%。活动应避开周一低谷。</p></div>
+        <div class="finding"><h4>发现2: 月末略高于月初</h4><p>21-30日均GMV 39,579，比1-10日(37,082)高6.7%，存在轻微月末消费偏好。</p></div>
+        <div class="finding"><h4>发现3: 曝光驱动增长</h4><p>活动期曝光+23.8%，但CVR下降10.1%，说明活动主要拉流量而非提转化。</p></div>
+        <div class="finding"><h4>发现4: 类目差异大</h4><p>冷冻即食面/饭ROI达2.56，而部分品类ROI<0.5，需差异化补贴策略。</p></div>
+      </div>
+    </section>
+
+    <section class="page">
+      <h1>核心图表与重点解读</h1>
+      <p class="section-lead">本报告核心可视化结果，包含时序图、周期分析和ROI排序。</p>
+
+      <div class="figure-card" data-figure-card>
+        <div class="figure-head">
+          <h4>图1. 日级GMV时序与活动标注</h4>
+          <div class="figure-actions">
+            <button type="button" data-upload-target="figure1">替换图片</button>
+            <button type="button" data-reset-target="figure1">恢复默认图</button>
+          </div>
+        </div>
+        <div class="figure-media" id="figure1"></div>
+        <input class="hidden-input" type="file" accept="image/*,.svg" data-input-for="figure1" />
+        <div class="figure-caption">图1：展示91天日级GMV时序，橙色竖线为活动日，虚线为反事实基线。</div>
+        <div class="chart-guide">读图指引：活动期实际GMV系统性高于基线为正向效果；活动后快速回落至基线以下为回吐现象。</div>
+        <div class="key-insights">关键洞察：10月活动（10/24-11/3）和11月活动（11/23-12/3）期间，GMV明显高于基线；但活动结束后均有短期回落。</div>
+      </div>
+
+      <div class="figure-card" data-figure-card>
+        <div class="figure-head">
+          <h4>图2. 活动窗口效果对比</h4>
+          <div class="figure-actions">
+            <button type="button" data-upload-target="figure2">替换图片</button>
+            <button type="button" data-reset-target="figure2">恢复默认图</button>
+          </div>
+        </div>
+        <div class="figure-media" id="figure2"></div>
+        <input class="hidden-input" type="file" accept="image/*,.svg" data-input-for="figure2" />
+        <div class="figure-caption">图2：四场活动的实际GMV与基线GMV对比，含iROI排序。</div>
+        <div class="chart-guide">读图指引：蓝色为实际GMV，灰色为基线；差值即活动增量。10月活动效果最佳，8月活动出现负增量。</div>
+        <div class="key-insights">关键洞察：10月活动增量+88,907，iROI最高0.857；8月活动实际低于基线685元，属于无效投放。</div>
+      </div>
+
+      <div class="figure-card" data-figure-card>
+        <div class="figure-head">
+          <h4>图3. 周内周期与月内周期</h4>
+          <div class="figure-actions">
+            <button type="button" data-upload-target="figure3">替换图片</button>
+            <button type="button" data-reset-target="figure3">恢复默认图</button>
+          </div>
+        </div>
+        <div class="figure-media" id="figure3"></div>
+        <input class="hidden-input" type="file" accept="image/*,.svg" data-input-for="figure3" />
+        <div class="figure-caption">图3：左图为周内周期（周六最高），右图为月内周期（月末略高于月初）。</div>
+        <div class="chart-guide">读图指引：周内周五-周日为高峰，周一-周四为低谷。月内无明显月初效应，月末有小幅翘尾。</div>
+        <div class="key-insights">关键洞察：活动排期建议避开周一低谷，选择周五-周日作为活动核心窗口。</div>
+      </div>
+    </section>
+
+    <section class="page">
+      <h1>核心发现：类目敏感度</h1>
+      <p class="section-lead">不同品类对活动的响应差异显著，需差异化运营策略。</p>
+
+      <div class="figure-card" data-figure-card>
+        <div class="figure-head">
+          <h4>图4. 类目活动敏感度排行（Top15）</h4>
+          <div class="figure-actions">
+            <button type="button" data-upload-target="figure4">替换图片</button>
+            <button type="button" data-reset-target="figure4">恢复默认图</button>
+          </div>
+        </div>
+        <div class="figure-media" id="figure4"></div>
+        <input class="hidden-input" type="file" accept="image/*,.svg" data-input-for="figure4" />
+        <div class="figure-caption">图4：按GMV提升率排序的Top15品类，绿色为正向，红色为负向。</div>
+        <div class="chart-guide">读图指引：提升率越高表示该品类对活动越敏感。拖把类提升1763%可能存在数据口径问题，需核实。</div>
+        <div class="key-insights">关键洞察：冷冻即食面/饭、驱蚊器、面膜等品类ROI>2.0，建议重点补贴；洗衣液、柔顺剂等大品类ROI约0.7-0.9，可适度维持。</div>
+      </div>
+
+      <h2>活动ROI排序表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>活动名称</th><th>实际GMV</th><th>基线GMV</th><th>增量GMV</th><th>总折扣</th><th>iROI</th><th>日均增量</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10月活动</td><td>486,922</td><td>398,015</td><td class="positive">+88,907</td><td>103,775</td><td class="positive">0.857</td><td>+8,082</td></tr>
+            <tr><td>11月活动</td><td>343,947</td><td>281,925</td><td class="positive">+62,022</td><td>86,163</td><td class="positive">0.720</td><td>+7,753</td></tr>
+            <tr><td>9月活动</td><td>423,501</td><td>398,150</td><td class="positive">+25,351</td><td>79,822</td><td>0.318</td><td>+2,305</td></tr>
+            <tr><td>8月活动</td><td>99,255</td><td>99,941</td><td class="negative">-685</td><td>20,130</td><td class="negative">-0.034</td><td class="negative">-228</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page">
+      <h1>建议与优先级</h1>
+      <p class="section-lead">基于数据分析的可落地优化建议。</p>
+
+      <div class="three-columns">
+        <div class="recommendation"><h4>优先级 1</h4><p>聚焦高ROI活动窗口，重点投放10月和11月类似活动</p></div>
+        <div class="recommendation"><h4>优先级 2</h4><p>优化曝光到转化的漏斗，提升CVR而非单纯拉流量</p></div>
+        <div class="recommendation"><h4>优先级 3</h4><p>差异化品类补贴策略，高敏感品类加码，低敏感品类控成本</p></div>
+      </div>
+
+      <h2>预算优化模拟</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>策略</th><th>预算</th><th>增量GMV</th><th>iROI</th><th>建议</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>当前全量投放</td><td>289,891</td><td>175,595</td><td>0.606</td><td>基准</td></tr>
+            <tr class="positive"><td>Top50% ROI投放</td><td>269,761</td><td>176,280</td><td class="positive">0.653</td><td>推荐：减少预算同时提升ROI</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>品类优先级建议</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>品类</th><th>GMV提升率</th><th>iROI</th><th>建议策略</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>冷冻即食面/饭</td><td>281%</td><td class="positive">2.56</td><td>重点补贴</td></tr>
+            <tr><td>驱蚊器</td><td>117%</td><td class="positive">2.42</td><td>重点补贴</td></tr>
+            <tr><td>面膜</td><td>75%</td><td class="positive">1.54</td><td>适度加码</td></tr>
+            <tr><td>洗衣液</td><td>63%</td><td>0.71</td><td>维持规模</td></tr>
+            <tr><td>衣物柔顺剂</td><td>67%</td><td>0.90</td><td>维持规模</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer-note">边界说明：8月活动样本较少（仅3天），iROI可能存在统计不稳定。建议增加实验周期验证。</div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const body = document.body;
+      const toggleBtn = document.getElementById('toggleEditBtn');
+      const printBtn = document.getElementById('printBtn');
+      const exportBtn = document.getElementById('exportBtn');
+      const editableNodes = Array.from(document.querySelectorAll('[data-editable="true"]'));
+
+      const defaultSvg = {
+        figure1: `<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="日级GMV时序">
+          <rect width="760" height="320" fill="#ffffff"/>
+          <line x1="70" y1="40" x2="70" y2="280" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="70" y1="280" x2="720" y2="280" stroke="#94a3b8" stroke-width="2"/>
+          <text x="80" y="35" font-size="14" fill="#475569">日级GMV时序 (9月-11月)</text>
+          <polyline fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4" points="120,200 180,195 240,180 300,175 360,190 420,150 480,120 540,130 600,170 660,190"/>
+          <polyline fill="none" stroke="#1d4ed8" stroke-width="3" points="120,205 180,200 240,185 300,178 360,160 420,100 480,85 540,95 600,175 660,195"/>
+          <rect x="390" y="40" width="130" height="240" fill="#dbeafe" opacity="0.4"/>
+          <rect x="540" y="40" width="110" height="240" fill="#dbeafe" opacity="0.35"/>
+          <text x="455" y="70" font-size="11" fill="#2563eb">10月活动</text>
+          <text x="595" y="70" font-size="11" fill="#2563eb">11月活动</text>
+          <text x="120" y="270" font-size="10" fill="#64748b">9月</text>
+          <text x="400" y="270" font-size="10" fill="#64748b">10月</text>
+          <text x="580" y="270" font-size="10" fill="#64748b">11月</text>
+          <circle cx="480" cy="85" r="4" fill="#1d4ed8"/>
+          <text x="485" y="82" font-size="10" fill="#1d4ed8">峰值</text>
+        </svg>`,
+        figure2: `<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="活动效果对比">
+          <rect width="760" height="300" fill="#ffffff"/>
+          <line x1="100" y1="40" x2="100" y2="250" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="100" y1="250" x2="700" y2="250" stroke="#94a3b8" stroke-width="2"/>
+          <text x="300" y="30" font-size="14" fill="#475569">各活动窗口实际GMV vs 基线GMV</text>
+          <rect x="140" y="100" width="100" height="150" fill="#e2e8f0"/>
+          <rect x="140" y="130" width="100" height="120" fill="#60a5fa"/>
+          <rect x="280" y="130" width="100" height="120" fill="#e2e8f0"/>
+          <rect x="280" y="155" width="100" height="95" fill="#60a5fa"/>
+          <rect x="420" y="145" width="100" height="105" fill="#e2e8f0"/>
+          <rect x="420" y="155" width="100" height="95" fill="#60a5fa"/>
+          <rect x="560" y="200" width="100" height="50" fill="#e2e8f0"/>
+          <rect x="560" y="198" width="100" height="52" fill="#ef4444" opacity="0.7"/>
+          <text x="170" y="265" font-size="11" fill="#475569">8月活动</text>
+          <text x="310" y="265" font-size="11" fill="#475569">9月活动</text>
+          <text x="450" y="265" font-size="11" fill="#475569">10月活动</text>
+          <text x="590" y="265" font-size="11" fill="#475569">11月活动</text>
+          <text x="10" y="170" font-size="10" fill="#475569" transform="rotate(-90 10 170)">GMV</text>
+          <rect x="650" y="50" width="8" height="8" fill="#e2e8f0"/><text x="662" y="58" font-size="10" fill="#475569">基线</text>
+          <rect x="650" y="65" width="8" height="8" fill="#60a5fa"/><text x="662" y="73" font-size="10" fill="#475569">实际</text>
+          <text x="595" y="185" font-size="10" fill="#dc2626">-685</text>
+        </svg>`,
+        figure3: `<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="周期分析">
+          <rect width="760" height="300" fill="#ffffff"/>
+          <text x="20" y="30" font-size="14" fill="#475569">周内周期</text>
+          <text x="400" y="30" font-size="14" fill="#475569">月内周期</text>
+          <line x1="60" y1="200" x2="350" y2="200" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="60" y1="50" x2="60" y2="200" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="420" y1="200" x2="710" y2="200" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="420" y1="50" x2="420" y2="200" stroke="#94a3b8" stroke-width="2"/>
+          <rect x="80" y="165" width="30" height="35" fill="#60a5fa"/><text x="95" y="245" font-size="10" fill="#475569">周一</text>
+          <rect x="120" y="155" width="30" height="45" fill="#60a5fa"/><text x="135" y="245" font-size="10" fill="#475569">周二</text>
+          <rect x="160" y="170" width="30" height="30" fill="#60a5fa"/><text x="175" y="245" font-size="10" fill="#475569">周三</text>
+          <rect x="200" y="180" width="30" height="20" fill="#60a5fa"/><text x="215" y="245" font-size="10" fill="#475569">周四</text>
+          <rect x="240" y="140" width="30" height="60" fill="#1d4ed8"/><text x="255" y="245" font-size="10" fill="#475569">周五</text>
+          <rect x="280" y="95" width="30" height="105" fill="#1d4ed8"/><text x="295" y="245" font-size="10" fill="#475569">周六</text>
+          <rect x="320" y="150" width="30" height="50" fill="#60a5fa"/><text x="335" y="245" font-size="10" fill="#475569">周日</text>
+          <polyline fill="none" stroke="#f59e0b" stroke-width="2" points="440,165 480,160 520,168 560,175 600,150 640,140 680,158"/>
+          <circle cx="680" cy="140" r="4" fill="#f59e0b"/>
+          <text x="475" y="190" font-size="9" fill="#64748b">1-10日</text>
+          <text x="555" y="190" font-size="9" fill="#64748b">11-20日</text>
+          <text x="635" y="190" font-size="9" fill="#64748b">21-30日</text>
+          <text x="670" y="135" font-size="10" fill="#f59e0b">月末翘尾</text>
+        </svg>`,
+        figure4: `<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="类目敏感度">
+          <rect width="760" height="320" fill="#ffffff"/>
+          <line x1="100" y1="40" x2="100" y2="280" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="100" y1="280" x2="720" y2="280" stroke="#94a3b8" stroke-width="2"/>
+          <text x="300" y="30" font-size="14" fill="#475569">类目活动敏感度排行 (Top 15)</text>
+          <rect x="110" y="50" width="200" height="18" fill="#16a34a" opacity="0.7"/><text x="315" y="63" font-size="10" fill="#475569">冷冻即食面/饭</text><text x="600" y="63" font-size="10" fill="#16a34a">+281%</text>
+          <rect x="110" y="75" width="120" height="18" fill="#16a34a" opacity="0.7"/><text x="235" y="88" font-size="10" fill="#475569">驱蚊器</text><text x="600" y="88" font-size="10" fill="#16a34a">+117%</text>
+          <rect x="110" y="100" width="100" height="18" fill="#16a34a" opacity="0.7"/><text x="215" y="113" font-size="10" fill="#475569">其他冷冻甜点</text><text x="600" y="113" font-size="10" fill="#16a34a">+103%</text>
+          <rect x="110" y="125" width="90" height="18" fill="#16a34a" opacity="0.6"/><text x="205" y="138" font-size="10" fill="#475569">面膜</text><text x="600" y="138" font-size="10" fill="#16a34a">+75%</text>
+          <rect x="110" y="150" width="85" height="18" fill="#16a34a" opacity="0.6"/><text x="200" y="163" font-size="10" fill="#475569">纸类</text><text x="600" y="163" font-size="10" fill="#16a34a">+70%</text>
+          <rect x="110" y="175" width="82" height="18" fill="#60a5fa" opacity="0.6"/><text x="197" y="188" font-size="10" fill="#475569">乳液/面霜</text><text x="600" y="188" font-size="10" fill="#2563eb">+70%</text>
+          <rect x="110" y="200" width="80" height="18" fill="#60a5fa" opacity="0.6"/><text x="195" y="213" font-size="10" fill="#475569">衣物柔顺剂</text><text x="600" y="213" font-size="10" fill="#2563eb">+67%</text>
+          <rect x="110" y="225" width="76" height="18" fill="#60a5fa" opacity="0.6"/><text x="191" y="238" font-size="10" fill="#475569">洗衣液</text><text x="600" y="238" font-size="10" fill="#2563eb">+63%</text>
+          <text x="10" y="165" font-size="10" fill="#475569" transform="rotate(-90 10 165)">GMV提升率</text>
+        </svg>`
+      };
+
+      function setEditing(enabled) {
+        body.classList.toggle('editing', enabled);
+        editableNodes.forEach((node) => { node.setAttribute('contenteditable', enabled ? 'true' : 'false'); });
+        toggleBtn.textContent = enabled ? '编辑模式：开启' : '编辑模式：关闭';
+      }
+
+      function resetFigure(targetId) {
+        const target = document.getElementById(targetId);
+        if (target) target.innerHTML = defaultSvg[targetId] || '';
+      }
+
+      function exportCurrentHtml() {
+        const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Keemart-Promo-Analysis-Report.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      }
+
+      document.querySelectorAll('[data-upload-target]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const input = document.querySelector(`[data-input-for="${button.dataset.uploadTarget}"]`);
+          if (input) input.click();
+        });
+      });
+
+      document.querySelectorAll('[data-reset-target]').forEach((button) => {
+        button.addEventListener('click', () => resetFigure(button.dataset.resetTarget));
+      });
+
+      document.querySelectorAll('[data-input-for]').forEach((input) => {
+        input.addEventListener('change', (event) => {
+          const file = event.target.files && event.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            const targetId = input.dataset.inputFor;
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            target.innerHTML = `<img src="${reader.result}" alt="用户替换图像" />`;
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      toggleBtn.addEventListener('click', () => setEditing(!body.classList.contains('editing')));
+      printBtn.addEventListener('click', () => window.print());
+      exportBtn.addEventListener('click', exportCurrentHtml);
+
+      Object.keys(defaultSvg).forEach(resetFigure);
+      setEditing(true);
+    })();
+  </script>
+</body>
+</html>
